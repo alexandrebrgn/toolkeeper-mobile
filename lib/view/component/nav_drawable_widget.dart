@@ -17,7 +17,7 @@ class NavDrawableWidget extends StatelessWidget{
                 leading: Icon(Icons.dashboard),
                 title: Text('Tableau de Bord'),
                 onTap: () => {
-                  Navigator.pop(context)
+                  Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home')),
                 },
               ),
               ListTile(
@@ -38,7 +38,7 @@ class NavDrawableWidget extends StatelessWidget{
                 leading: Icon(Icons.fire_extinguisher),
                 title: Text('Equipements'),
                 onTap: () => {
-                  Navigator.pop(context)
+                  Navigator.pushNamedAndRemoveUntil(context, '/tool', ModalRoute.withName('/tool')),
                 },
               ),
               ListTile(

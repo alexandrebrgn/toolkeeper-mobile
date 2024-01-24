@@ -27,6 +27,9 @@ class LoginViewState extends State<StatefulWidget> {
   void initState() {
     developer.log('LoginViewState - initState()');
 
+    // Debug
+    _tecEmail.text = 'brgn.alex@test.fr';
+    _tecPassword.text = '12345678';
     _lvm=Provider.of<LoginViewModel>(context,listen:false);
   }
 
@@ -65,6 +68,7 @@ class LoginViewState extends State<StatefulWidget> {
         child : TextFormField(
           controller : _tecPassword,
           autofocus: true,
+          obscureText: true,
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.lock, color: Colors.grey),
             labelText: 'Mot de passe',

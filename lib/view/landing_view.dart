@@ -29,7 +29,7 @@ class LandingViewState extends State<LandingView> {
     developer.log('LandingViewState - _routeFirstView()');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('userId', 0);
+    // prefs.setInt('userId', 0);
 
     int userId = (prefs.getInt('userId') ?? 0);
     if (userId == 0) {
