@@ -28,7 +28,7 @@ class LoginViewState extends State<StatefulWidget> {
     developer.log('LoginViewState - initState()');
 
     // Debug
-    _tecEmail.text = 'brgn.alex@test.fr';
+    _tecEmail.text = 'operator.tk@test.fr';
     _tecPassword.text = '12345678';
     _lvm=Provider.of<LoginViewModel>(context,listen:false);
   }

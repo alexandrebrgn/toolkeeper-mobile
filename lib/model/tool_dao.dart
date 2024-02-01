@@ -20,4 +20,22 @@ class ToolDAO {
     developer.log('ToolDAO - all() : Error, no data find on route GET /tool');
     return List.empty();
   }
+
+  static Future<Tool?> find(int id) async{
+    developer.log('ToolDAO - find($id)');
+
+    final resp = await Api.get(
+      route: '/tool/$id', token: true
+    );
+
+    if (resp.status == Status.COMPLETED) {
+      developer.log('ToolDAO - find($id) : ${jsonDecode(resp.data)['number']}');
+      Tool tool = Tool.fromJSON(jsonDecode(resp.data));
+      developer.log('ToolDAO - find($id) : $tool');
+      return tool;
+    }
+
+    developer.log('ToolDAO - find() : Error, no data find on route GET /tool');
+    return null;
+  }
 }
