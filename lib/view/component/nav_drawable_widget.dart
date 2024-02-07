@@ -24,7 +24,7 @@ class NavDrawableWidget extends StatelessWidget{
                 leading: Icon(Icons.construction),
                 title: Text('Opération de maintenance'),
                 onTap: () => {
-                  Navigator.pop(context)
+                  Navigator.pushNamedAndRemoveUntil(context, '/operation', ModalRoute.withName('/operation')),
                 },
               ),
               ListTile(

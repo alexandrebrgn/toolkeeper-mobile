@@ -6,11 +6,13 @@ import 'view/landing_view.dart';
 import 'view/authenticate/login_view.dart';
 import 'view/home/home_view.dart';
 import 'view/tool/tool_view.dart';
+import 'view/operation/operation_browse_view.dart';
 
 // ViewModels
 import 'view_model/login_view_model.dart';
 import 'view_model/home_view_model.dart';
 import 'view_model/tool_view_model.dart';
+import 'view_model/operation_view_model.dart';
 
 class App{
   late MaterialApp _startUpView;
@@ -26,6 +28,7 @@ class App{
         '/login': (context) => ChangeNotifierProvider(create: (context) => LoginViewModel(), child: const LoginView()),
         '/home': (context) => ChangeNotifierProvider(create: (context) => HomeViewModel(), child: const HomeView()),
         '/tool': (context) => ChangeNotifierProvider(create: (context) => ToolViewModel(), child: const ToolView()),
+        '/operation': (context) => ChangeNotifierProvider(create: (context) => OperationViewModel(), child: const OperationBrowseView()),
       },
     );
   }

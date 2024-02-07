@@ -56,7 +56,7 @@ class ToolViewState extends State<StatefulWidget> {
                           itemBuilder: (context, index) {
                             return ListTile(
                                 leading: Icon(Icons.fire_extinguisher),
-                                trailing: Icon(Icons.arrow_right),
+                                trailing: Icon(Icons.keyboard_arrow_right),
                                 onTap: () {
                                   developer.log('ToolViewState - build() - Appui sur l\'équipement : $index');
                                   Navigator.push(context,

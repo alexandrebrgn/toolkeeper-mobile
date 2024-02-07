@@ -29,7 +29,7 @@ class LandingViewState extends State<LandingView> {
     developer.log('LandingViewState - _routeFirstView()');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setInt('userId', 0);
+    prefs.setInt('userId', 0);
 
     int userId = (prefs.getInt('userId') ?? 0);
     if (userId == 0) {
@@ -39,7 +39,7 @@ class LandingViewState extends State<LandingView> {
     } else {
       // User is already connected -> /home
       developer.log('LandingViewState - _routeFirstView() : User $userId was already connected');
-      Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/login'));
+      Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home'));
     }
   }
 

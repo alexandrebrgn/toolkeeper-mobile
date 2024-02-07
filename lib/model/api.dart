@@ -32,15 +32,15 @@ class Api {
       switch (resp.statusCode) {
         case 200 :
           status = Status.COMPLETED;
-          developer.log('Api - post(): \n\tAPI is responding : ${resp.statusCode} - ${resp.body}');
+          developer.log('Api - get(): \n\tAPI is responding : ${resp.statusCode} - ${resp.body}');
           break;
         default:
-          developer.log('Api - post(): \n\tAPI respond with an error : ${resp.statusCode} - ${resp.body}');
+          developer.log('Api - get(): \n\tAPI respond with an error : ${resp.statusCode} - ${resp.body}');
           status = Status.ERROR;
       }
       return ApiResponse(status, resp.body, resp.statusCode.toString());
     }
-    developer.log('Api - post(): \n\t No route specified');
+    developer.log('Api - get(): \n\t No route specified');
     return ApiResponse(Status.ERROR, null, 'No route specified');
   }
 

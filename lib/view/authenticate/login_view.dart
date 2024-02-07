@@ -103,6 +103,7 @@ class LoginViewState extends State<StatefulWidget> {
               Future<bool> isUserConnected = _lvm.signInButtonOnClickCommand(_tecEmail.text, _tecPassword.text);
               isUserConnected.then((value) {
                 if (value) {
+                  developer.log('Value : $value');
                   Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                 }
               });

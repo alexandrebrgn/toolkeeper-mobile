@@ -24,6 +24,8 @@ class Auth {
         developer.log("Auth - attempt() :\n\t Token : ${response['success']['token']}");
         Api.token = response['success']['token'];
         prefs.setString('token', Api.token);
+        prefs.setString('email', response['success']['email']);
+        developer.log('Auth - attempt - sharedPrefreences(email) : ${prefs.get('email')}');
         return true;
       }
     }
