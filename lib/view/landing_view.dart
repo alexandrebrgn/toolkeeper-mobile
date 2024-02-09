@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,25 +49,35 @@ class LandingViewState extends State<LandingView> {
     developer.log('LadingViewState - build()');
 
     final applicationName = Container(
-        color: Colors.white,
         padding: EdgeInsets.all(10),
         child: Text('ToolKeeper', style: TextStyle(
           fontSize: 50,
           fontWeight: FontWeight.bold,
-          color: Colors.lightGreen
+          color: Colors.white
         ))
     );
 
     final circularIndicator = Center(child: CircularProgressIndicator(color: Colors.white));
+
     return Scaffold(
-        backgroundColor: Colors.lightGreen,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            applicationName,
-            circularIndicator
-          ],
-        )
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/operator.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child : BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                applicationName,
+                circularIndicator
+            ],
+          ),
+        ),
+    )
     );
   }
 }
