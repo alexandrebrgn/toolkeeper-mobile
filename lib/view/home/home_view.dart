@@ -2,6 +2,8 @@ import 'package:campus/view/component/nav_drawable_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
+import '../../config/app_settings.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -20,9 +22,7 @@ class HomeViewState extends State<StatefulWidget> {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToolKeeper - HomeView')
-      ),
+      appBar: AppSettings.appBarSettings(),
       body: Column(
         children: <Widget>[
           const Text('Home'),

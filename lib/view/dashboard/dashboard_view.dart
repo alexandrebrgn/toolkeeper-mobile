@@ -3,11 +3,9 @@ import 'package:campus/view/tool/tool_read_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as developer;
-import '../../config/app_settings.dart';
 
 import '../../model/operation.dart';
 import '../../view_model/operation_view_model.dart';
-import 'operation_read_view.dart';
 
 class OperationBrowseView extends StatefulWidget {
   const OperationBrowseView({Key? key}) : super(key: key);
@@ -36,18 +34,13 @@ class OperationBrowseViewState extends State<OperationBrowseView> {
     ();
 
     return Scaffold(
-        appBar: AppSettings.appBarSettings(),
+        appBar: AppBar(
+            title: const Text('ToolKeeper')
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20, 20),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child : const Text('Opérations de maintenance', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                )
-            ),
+            const Text('Opérations de maintenance'),
             Expanded(
                 child: RefreshIndicator(
                     onRefresh: () => _ovm.initBrowOperations(),
@@ -66,11 +59,11 @@ class OperationBrowseViewState extends State<OperationBrowseView> {
                                       trailing: Icon(Icons.arrow_right),
                                       onTap: () {
                                         developer.log('ToolViewState - build() - Appui sur l\'opération : $index');
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) => OperationReadView(ovm:_ovm,operation:operations[index])));
+                                        // Navigator.push(context,
+                                        //     MaterialPageRoute(builder: (context) => ToolReadView(tvm:_ovm,tool:tools[index])));
                                       },
                                       subtitle: Text(operations[index].report),
-                                      title: Text(AppSettings.frenchFormat(operations[index].toDoDate, '')),
+                                      title: Text(operations[index].toDoDate)
                                   );
                                 }
                             );

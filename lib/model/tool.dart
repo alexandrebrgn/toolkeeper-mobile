@@ -1,4 +1,5 @@
 import 'category.dart';
+import 'operation.dart';
 
 class Tool{
   final int id;
@@ -8,7 +9,8 @@ class Tool{
   final String localisation;
   final String dateNextOperation;
   final int toDo;
-  //final Category category;
+  final Category? category;
+  final List<Operation>? operations;
 
   Tool({
     required this.id,
@@ -17,8 +19,10 @@ class Tool{
     required this.isActive,
     required this.localisation,
     required this.dateNextOperation,
-    required this.toDo,});
-    // required this.category});
+    required this.toDo,
+    this.category,
+    this.operations
+  });
 
   // Construire un objet depuis un mapped JSON
   factory Tool.fromJSON(Map<String, dynamic> mappedJson) {
@@ -30,7 +34,20 @@ class Tool{
         localisation: mappedJson['localisation'] ?? '',
         dateNextOperation: mappedJson['dateNextOperation'] ?? '',
         toDo: mappedJson['toDo'],
-        // category: mappedJson['category'],
+        category: Category.fromJSON(mappedJson['category']),
+        operations : mappedJson['operations'] == null ? null : mappedJson['operations'].map<Operation>((operation) => Operation.noRelationsFromJSON(operation)).toList(),
+    );
+  }
+
+  factory Tool.noRelationsFromJSON(Map<String, dynamic> mappedJson) {
+    return Tool(
+      id: mappedJson['id'],
+      number: mappedJson['number'] ?? '',
+      serialId: mappedJson['serialId'] ?? '',
+      isActive: mappedJson['isActive'],
+      localisation: mappedJson['localisation'] ?? '',
+      dateNextOperation: mappedJson['dateNextOperation'] ?? '',
+      toDo: mappedJson['toDo'],
     );
   }
 }

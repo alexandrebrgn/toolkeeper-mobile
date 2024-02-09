@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer' as developer;
 
+import '../../config/app_settings.dart';
 import '../../model/tool.dart';
 import '../../view_model/tool_view_model.dart';
 
@@ -34,13 +35,18 @@ class ToolViewState extends State<StatefulWidget> {
     _tvm.initBrowTools();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToolKeeper')
-      ),
+      appBar: AppSettings.appBarSettings(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Equipements'),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20, 20),
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child : const Text('Equipements', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                )
+            ),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () => _tvm.browTools(),
@@ -55,7 +61,7 @@ class ToolViewState extends State<StatefulWidget> {
                           itemCount: tools.length,
                           itemBuilder: (context, index) {
                             return ListTile(
-                                leading: Icon(Icons.fire_extinguisher),
+                                leading: AppSettings.iconOfCategory(tools[index].category!.name),
                                 trailing: Icon(Icons.keyboard_arrow_right),
                                 onTap: () {
                                   developer.log('ToolViewState - build() - Appui sur l\'équipement : $index');

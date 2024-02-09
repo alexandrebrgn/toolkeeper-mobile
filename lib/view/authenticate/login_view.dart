@@ -112,27 +112,29 @@ class LoginViewState extends State<StatefulWidget> {
 
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // Application Name
-          applicationName,
-          infoText,
-          Container(
-            color: Colors.white,
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child : SingleChildScrollView(
-              child : Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  email,
-                  password,
-                  submit,
-                ],
+      body: SingleChildScrollView(
+          child : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Application Name
+            applicationName,
+            infoText,
+            Container(
+              color: Colors.white,
+              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child : SingleChildScrollView(
+                child : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    email,
+                    password,
+                    submit,
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        )
       )
     );
   }

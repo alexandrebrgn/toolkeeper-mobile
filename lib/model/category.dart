@@ -1,8 +1,9 @@
+import 'package:scidart/numdart.dart';
 
 class Category{
   final int id;
   final String name;
-  final String isLegal;
+  final bool isLegal;
 
   Category({
     required this.id,
@@ -14,7 +15,7 @@ class Category{
     return Category(
       id: mappedJson['id'],
       name: mappedJson['name'] ?? '',
-      isLegal: mappedJson['isLegal'] ?? ''
+      isLegal: intToBool(mappedJson['isLegal'] ?? false),
     );
   }
 }

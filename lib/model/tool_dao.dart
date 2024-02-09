@@ -13,7 +13,7 @@ class ToolDAO {
     final resp = await Api.get(route: '/tool', urlParams: null, token: true);
 
     if (resp.status == Status.COMPLETED) {
-      developer.log('ToolDAO - all() : API is responding :\n\t Data : ${resp.data}\n\tMessage ${resp.message}');
+      developer.log('ToolDAO - all() : API is responding : ${resp.message}');//\n\t Data : ${resp.data}\n\tMessage ${resp.message}');
 
       return jsonDecode(resp.data).map<Tool>((item) => Tool.fromJSON(item)).toList();
     }

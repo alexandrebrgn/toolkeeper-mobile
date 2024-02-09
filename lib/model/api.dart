@@ -32,7 +32,7 @@ class Api {
       switch (resp.statusCode) {
         case 200 :
           status = Status.COMPLETED;
-          developer.log('Api - get(): \n\tAPI is responding : ${resp.statusCode} - ${resp.body}');
+          developer.log('Api - get(): \n\tAPI is responding : ${resp.statusCode}');
           break;
         default:
           developer.log('Api - get(): \n\tAPI respond with an error : ${resp.statusCode} - ${resp.body}');
@@ -60,7 +60,7 @@ class Api {
       switch (resp.statusCode) {
         case 200 :
           status = Status.COMPLETED;
-          developer.log('Api - post(): \n\tAPI is responding : ${resp.statusCode} - ${resp.body}');
+          developer.log('Api - post(): \n\tAPI is responding : ${resp.statusCode}');
           break;
         default:
           developer.log('Api - post(): \n\tAPI respond with an error : ${resp.statusCode} - ${resp.body}');
