@@ -38,4 +38,22 @@ class ToolDAO {
     developer.log('ToolDAO - find() : Error, no data find on route GET /tool');
     return null;
   }
+
+  static Future<Tool?> findBySerialId(String serialId) async{
+    developer.log('ToolDAO - findBySerialId($serialId)');
+
+    final resp = await Api.get(
+        route: '/tool/serialId/$serialId', token: true
+    );
+
+    if (resp.status == Status.COMPLETED) {
+      developer.log('ToolDAO - findBySerialId($serialId) : ${jsonDecode(resp.data)['serialId']}');
+      Tool tool = Tool.fromJSON(jsonDecode(resp.data));
+      developer.log('ToolDAO - findBySerialId($serialId) : $tool');
+      return tool;
+    }
+
+    developer.log('ToolDAO - findBySerialId() : Error, no data find on route GET /tool');
+    return null;
+  }
 }

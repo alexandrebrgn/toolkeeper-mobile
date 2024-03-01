@@ -4,17 +4,19 @@ import 'user.dart';
 
 class Operation{
   final int id;
-  final String date;
+  final String? date;
   final String report;
   final String toDoDate;
+  final String? dateNextOperation;
   final Tool? tool;
   final User? user;
 
   Operation({
     required this.id,
-    required this.date,
+    this.date,
     required this.report,
     required this.toDoDate,
+    this.dateNextOperation,
     this.tool,
     this.user,
   });
@@ -28,6 +30,8 @@ class Operation{
       toDoDate: mappedJson['toDoDate'] ?? '',
       tool: Tool.noRelationsFromJSON(mappedJson['tool']),
       user: User.fromJSON(mappedJson['user']),
+      // tool: mappedJson['tool'] ?? Tool.noRelationsFromJSON(mappedJson['tool']),
+      // user: mappedJson['user'] ?? User.fromJSON(mappedJson['user']),
     );
   }
 
@@ -38,5 +42,10 @@ class Operation{
       report: mappedJson['report'] ?? '',
       toDoDate: mappedJson['toDoDate'] ?? '',
     );
+  }
+
+  @override
+  String toString() {
+    return "{id: $id, report: $report}";
   }
 }

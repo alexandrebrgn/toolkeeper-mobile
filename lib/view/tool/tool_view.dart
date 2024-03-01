@@ -66,10 +66,10 @@ class ToolViewState extends State<StatefulWidget> {
                                 onTap: () {
                                   developer.log('ToolViewState - build() - Appui sur l\'équipement : $index');
                                   Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => ToolReadView(tvm:_tvm,tool:tools[index])));
+                                  MaterialPageRoute(builder: (context) => ToolReadView(tvm:_tvm, tool:tools[index])));
                                 },
                                 subtitle: Text(tools[index].serialId),
-                                title: Text(tools[index].number,)
+                                title: Text(tools[index].name,)
                             );
                           }
                     );

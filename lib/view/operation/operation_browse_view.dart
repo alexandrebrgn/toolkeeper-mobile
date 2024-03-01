@@ -8,6 +8,10 @@ import '../../config/app_settings.dart';
 import '../../model/operation.dart';
 import '../../view_model/operation_view_model.dart';
 import 'operation_read_view.dart';
+import '../component/bottom_navigation_bar.dart';
+import 'package:intl/date_time_patterns.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 class OperationBrowseView extends StatefulWidget {
   const OperationBrowseView({Key? key}) : super(key: key);
@@ -20,6 +24,7 @@ class OperationBrowseView extends StatefulWidget {
 
 class OperationBrowseViewState extends State<OperationBrowseView> {
 
+  late List<Map> filteredOperations;
   late OperationViewModel _ovm;
 
   @override
@@ -33,7 +38,6 @@ class OperationBrowseViewState extends State<OperationBrowseView> {
   Widget build(BuildContext context) {
     developer.log('OperationBrowseViewState - build()');
     _ovm.initBrowOperations();
-    ();
 
     return Scaffold(
         appBar: AppSettings.appBarSettings(),
@@ -50,27 +54,27 @@ class OperationBrowseViewState extends State<OperationBrowseView> {
             ),
             Expanded(
                 child: RefreshIndicator(
-                    onRefresh: () => _ovm.initBrowOperations(),
-                    child: FutureBuilder<List<Operation>>(
+                    onRefresh: () => _ovm.browOperations(),
+                    child: FutureBuilder<List<Operation?>>(
                         future : _ovm.operations,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-
-                            List<Operation> operations = snapshot.data!;
+                            developer.log('ToolViewState - new Data');
+                            List<Operation?> operations = snapshot.data!;
 
                             return ListView.builder(
                                 itemCount: operations.length,
                                 itemBuilder: (context, index) {
                                   return ListTile(
-                                      leading: Icon(Icons.fire_extinguisher),
-                                      trailing: Icon(Icons.arrow_right),
-                                      onTap: () {
-                                        developer.log('ToolViewState - build() - Appui sur l\'opération : $index');
+                                      leading: const Icon(Icons.fire_extinguisher),
+                                      trailing: const Icon(Icons.arrow_right),
+                                      onTap: () => {
+                                        developer.log('ToolViewState - build() - Appui sur l\'opération : $index'),
                                         Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) => OperationReadView(ovm:_ovm,operation:operations[index])));
+                                            MaterialPageRoute(builder: (context) => OperationReadView(ovm:_ovm,operation:operations[index]))),
                                       },
-                                      subtitle: Text(operations[index].report),
-                                      title: Text(AppSettings.frenchFormat(operations[index].toDoDate, '')),
+                                      title: Text('Prévue le ${AppSettings.frenchFormat(operations[index]!.toDoDate, '')}'),
+                                      subtitle: Text('${operations[index]!.user!.firstName}' + ' ' + operations[index]!.user!.lastName),
                                   );
                                 }
                             );
@@ -84,7 +88,7 @@ class OperationBrowseViewState extends State<OperationBrowseView> {
             )
           ],
         ),
-        drawer: const NavDrawableWidget()
+        drawer: const NavDrawableWidget(),
     );
 
   }

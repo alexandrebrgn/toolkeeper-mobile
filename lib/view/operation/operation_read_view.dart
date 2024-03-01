@@ -8,6 +8,9 @@ import '../../config/app_settings.dart';
 //View_model
 import '../../view_model/operation_view_model.dart';
 
+//View
+import '../../view/operation/operation_edit_view.dart';
+
 // Model
 import '../../model/operation.dart';
 
@@ -34,8 +37,78 @@ class OperationReadViewState extends State<OperationReadView> {
 
   @override
   Widget build(BuildContext context) {
+
+    var editButton = Container(
+      child: ElevatedButton(
+        child: Text('Opération de maintenance'),
+        onPressed: () => {
+          developer.log('ToolViewState - build() - Appui sur l\'opération :'),
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) =>
+                  Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child : OperationEditView(ovm: widget.ovm!, operation: widget.operation!),
+                  )
+          )
+        },
+      ),
+    );
+
+    getDate(operation) {
+      if(operation.date != '') {
+        return ListTile(
+          title: Text('Date d\'opération : ${ AppSettings.frenchFormat(operation.date, '') }'),
+          subtitle: Text('Opérateur : ${operation.user!.firstName} ${operation.user!.lastName} #${operation.id}'),
+        );
+      } else {
+        return ListTile(
+          title: Text('Date d\'opération prévue : ${ AppSettings.frenchFormat(operation.toDoDate, '') }'),
+          subtitle: Text('Opérateur : ${operation.user!.firstName} ${operation.user!.lastName} #${operation.id}'),
+        );
+      }
+    }
+
+    getReportTitle(operation) {
+      if(operation.date != '') {
+        return Container(
+            width: double.infinity,
+            child: const Padding(
+                padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
+                child: Text('Rapport de l\'opération')
+            )
+        );
+      } else {
+        return Container();
+      }
+    }
+
+    getReportView(operation) {
+      if(operation.date != '') {
+        return SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
+                child: Container(
+                  color: Colors.white,
+                  alignment: Alignment.topLeft,
+                  height: 100,
+                  child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text('${operation.report}')
+                  ),
+                )
+            )
+        );
+      } else {
+        return Container();
+      }
+    }
+
     developer.log('OperationReadViewState - build()');
-    widget.ovm!.initReadOperation(widget.operation!.id);
+    widget.ovm!.initReadOperation(widget.operation!.id); // <- Erreur : setState() or markNeedsBuild() called during build
+
     return Scaffold(
       appBar: AppSettings.appBarSettings(),
       body: SingleChildScrollView(
@@ -46,6 +119,7 @@ class OperationReadViewState extends State<OperationReadView> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Operation operation = snapshot.data!;
+                if (operation.date != '' && operation.date != null) { editButton = Container();}
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -64,32 +138,9 @@ class OperationReadViewState extends State<OperationReadView> {
                           elevation: 1.0,
                           child: Column(
                             children: [
-                              ListTile(
-                                title: Text('Date d\'opération : ${AppSettings.frenchFormat(operation.date, '')}'),
-                                subtitle: Text('Opérateur : ${operation.user!.firstName} ${operation.user!.lastName}'),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
-                                  child: Text('Rapport de l\'opération')
-                                )
-                              ),
-                              SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
-                                    child: Container (
-                                      color: Colors.white,
-                                      alignment: Alignment.topLeft,
-                                      height: 100,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(15.0),
-                                          child : Text('${operation.report}')
-                                      ),
-                                  )
-                                )
-                              )
+                              getDate(operation),
+                              getReportTitle(operation),
+                              getReportView(operation),
                             ],
                           ),
                         )
@@ -110,14 +161,15 @@ class OperationReadViewState extends State<OperationReadView> {
                           child: Column(
                             children: [
                               ListTile(
-                                title: Text('Equipement : ${operation.tool!.number}'),
+                                title: Text('Equipement : ${operation.tool!.name}'),
                                 subtitle: Text('N° Série : ${operation.tool!.serialId}'),
                               )
                             ],
                           ),
                         )
                       ]
-                    )
+                    ),
+                    editButton
                   ]
                 );
               } else if (snapshot.hasError){

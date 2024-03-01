@@ -65,7 +65,7 @@ class ToolReadViewState extends State<ToolReadView> {
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text('Equipement : ${tool.number}'),
+                            title: Text('Equipement : ${tool.name}'),
                             leading: AppSettings.iconOfCategory(tool.category!.name),
                             subtitle: Text('N° Série : ${tool.serialId}'),
                           ),
@@ -119,8 +119,7 @@ class ToolReadViewState extends State<ToolReadView> {
                                   leading: Icon(Icons.build),
                                   trailing: Icon(Icons.keyboard_arrow_right),
                                   onTap: () {
-                                    developer.log(
-                                        'ToolViewState - build() - Appui sur l\'équipement : $index');
+                                    developer.log('ToolViewState - build() - Appui sur l\'équipement : $index');
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => OperationReadView(ovm: OperationViewModel(),operation:tool.operations![index])));
                                   },
                                   title: Text(tool.operations![index].report),

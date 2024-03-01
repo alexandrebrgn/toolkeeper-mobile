@@ -7,31 +7,28 @@ class NavDrawableWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 250,
         child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                child: const Text('ToolKeeper'),
+              const SizedBox(
+                height: 100,
+                  child : DrawerHeader(
+                    child: Text('ToolKeeper'),
+                  )
+              ),
+              ListTile(
+                leading: Icon(Icons.perm_identity),
+                title: Text('Profil'),
+                onTap: () => {
+                  Navigator.pushNamedAndRemoveUntil(context, '/profile', ModalRoute.withName('/profile')),
+                },
               ),
               ListTile(
                 leading: Icon(Icons.dashboard),
                 title: Text('Tableau de Bord'),
                 onTap: () => {
                   Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home')),
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.construction),
-                title: Text('Opération de maintenance'),
-                onTap: () => {
-                  Navigator.pushNamedAndRemoveUntil(context, '/operation', ModalRoute.withName('/operation')),
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.category),
-                title: Text('Category'),
-                onTap: () => {
-                  Navigator.pop(context)
                 },
               ),
               ListTile(
@@ -42,12 +39,33 @@ class NavDrawableWidget extends StatelessWidget{
                 },
               ),
               ListTile(
+                leading: Icon(Icons.construction),
+                title: Text('Maintenances'),
+                onTap: () => {
+                  Navigator.pushNamedAndRemoveUntil(context, '/operation', ModalRoute.withName('/operation')),
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.category),
+                title: Text('Categories'),
+                onTap: () => {
+                  Navigator.pop(context)
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Paramètres'),
+                onTap: () => {
+                  Navigator.pushNamedAndRemoveUntil(context, '/settings', ModalRoute.withName('/settings')),
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Se déconnecter'),
                 onTap: () => {
                   Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/login')),
                 },
-              )
+              ),
             ]
         )
     );

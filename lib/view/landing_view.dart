@@ -61,6 +61,7 @@ class LandingViewState extends State<LandingView> {
 
     return Scaffold(
         body: Container(
+          width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/operator.jpg'),
@@ -72,8 +73,7 @@ class LandingViewState extends State<LandingView> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                applicationName,
-                circularIndicator
+                applicationName
             ],
           ),
         ),

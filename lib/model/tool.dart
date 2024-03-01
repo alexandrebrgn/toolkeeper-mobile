@@ -3,7 +3,7 @@ import 'operation.dart';
 
 class Tool{
   final int id;
-  final String number;
+  final String name;
   final String serialId;
   final int isActive;
   final String localisation;
@@ -14,7 +14,7 @@ class Tool{
 
   Tool({
     required this.id,
-    required this.number,
+    required this.name,
     required this.serialId,
     required this.isActive,
     required this.localisation,
@@ -28,7 +28,7 @@ class Tool{
   factory Tool.fromJSON(Map<String, dynamic> mappedJson) {
     return Tool(
         id: mappedJson['id'],
-        number: mappedJson['number'] ?? '',
+        name: mappedJson['name'] ?? '',
         serialId: mappedJson['serialId'] ?? '',
         isActive: mappedJson['isActive'],
         localisation: mappedJson['localisation'] ?? '',
@@ -42,7 +42,7 @@ class Tool{
   factory Tool.noRelationsFromJSON(Map<String, dynamic> mappedJson) {
     return Tool(
       id: mappedJson['id'],
-      number: mappedJson['number'] ?? '',
+      name: mappedJson['name'] ?? '',
       serialId: mappedJson['serialId'] ?? '',
       isActive: mappedJson['isActive'],
       localisation: mappedJson['localisation'] ?? '',
