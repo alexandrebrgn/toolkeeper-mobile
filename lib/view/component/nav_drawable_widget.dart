@@ -18,24 +18,10 @@ class NavDrawableWidget extends StatelessWidget{
                   )
               ),
               ListTile(
-                leading: Icon(Icons.perm_identity),
-                title: Text('Profil'),
-                onTap: () => {
-                  Navigator.pushNamedAndRemoveUntil(context, '/profile', ModalRoute.withName('/profile')),
-                },
-              ),
-              ListTile(
                 leading: Icon(Icons.dashboard),
                 title: Text('Tableau de Bord'),
                 onTap: () => {
                   Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home')),
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.fire_extinguisher),
-                title: Text('Equipements'),
-                onTap: () => {
-                  Navigator.pushNamedAndRemoveUntil(context, '/tool', ModalRoute.withName('/tool')),
                 },
               ),
               ListTile(
@@ -46,10 +32,24 @@ class NavDrawableWidget extends StatelessWidget{
                 },
               ),
               ListTile(
+                leading: Icon(Icons.fire_extinguisher),
+                title: Text('Equipements'),
+                onTap: () => {
+                  Navigator.pushNamedAndRemoveUntil(context, '/tool', ModalRoute.withName('/tool')),
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.category),
                 title: Text('Categories'),
                 onTap: () => {
                   Navigator.pop(context)
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.perm_identity),
+                title: Text('Profil'),
+                onTap: () => {
+                  Navigator.pushNamedAndRemoveUntil(context, '/profile', ModalRoute.withName('/profile')),
                 },
               ),
               ListTile(
